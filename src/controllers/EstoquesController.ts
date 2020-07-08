@@ -23,7 +23,8 @@ class EstoquesController{
   }
 
   async update(request:Request,response:Response){
-    const { id, name } = request.body
+    const {id} = request.params
+    const { name } = request.body
     const resUpdate = await knex('estoques').where({id:id}).update({
       "name" : name
     })
