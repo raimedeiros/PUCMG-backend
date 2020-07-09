@@ -7,6 +7,15 @@ class EstoquesController{
     return response.json(estoques)
   }
 
+  async show(request: Request, response: Response) {
+    const {id} = request.params
+    const estoques = await knex('estoques').where('id',id).first()
+    if(!estoques){
+      return response.status(400).json({message:"Estoque não encontrado"})
+    }
+    return response.json(estoques)
+  }
+  
   async create(request: Request, response: Response) {
     const  {name} = request.body;
     const estoque = {name}

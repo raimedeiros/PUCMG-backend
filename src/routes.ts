@@ -15,6 +15,7 @@ routes.post('/tipos-estoques/:id', tiposEstoquesController.update)
 routes.delete('/tipos-estoques', tiposEstoquesController.delete)
 
 routes.get('/estoques', estoquesController.index)
+routes.get('/estoques/:id', estoquesController.show)
 routes.post('/estoques', estoquesController.create)
 routes.post('/estoques/:id', estoquesController.update)
 routes.delete('/estoques', estoquesController.delete)
