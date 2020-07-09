@@ -1,10 +1,17 @@
 import express from 'express';
+import TiposEstoquesController from './controllers/TiposEstoquesController'
 import EstoquesController from './controllers/EstoquesController'
 import ProdutosController from './controllers/ProdutosController'
 
 const routes = express.Router();
 const estoquesController = new EstoquesController()
+const tiposEstoquesController = new TiposEstoquesController()
 const produtosController = new ProdutosController()
+
+routes.get('/tipos-estoques', tiposEstoquesController.index)
+routes.post('/tipos-estoques', tiposEstoquesController.create)
+routes.post(`/tipos-estoques/:id`, tiposEstoquesController.update)
+routes.delete('/tipos-estoques', tiposEstoquesController.delete)
 
 routes.get('/estoques', estoquesController.index)
 routes.post('/estoques', estoquesController.create)
