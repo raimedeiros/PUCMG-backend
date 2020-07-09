@@ -3,8 +3,16 @@ import knex from '../database/connection'
 
 class ProdutosController{
   async index(request: Request, response: Response) {
-    const estoques = await knex('produtos').select('*')
-    return response.json(estoques)
+    const produtos = await knex('produtos').select('*')
+    return response.json(produtos)
+  }
+  async show(request: Request, response: Response) {
+    const {id} = request.params
+    const produtos = await knex('produtos').where('id',id).first()
+    if(!produtos){
+      return response.status(400).json({message:"Estoque não encontrado"})
+    }
+    return response.json(produtos)
   }
   async create(request:Request, response:Response){
     const {name,expires,quantity} = request.body
