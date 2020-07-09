@@ -45,7 +45,7 @@ class EstoquesController{
   }
 
   async delete(request:Request, response: Response){
-    const { id } = request.body
+    const { id } = request.params
     const resUpdate = await knex('tipos_estoques').where("id",id).del()
     if (resUpdate>0){
       return response.status(200).json({message: 'item removido'})
