@@ -35,8 +35,8 @@ class FuncionariosController{
     const {id} = request.params
     const { name,type } = request.body
     const resUpdate = await knex('funcionarios').where({id:id}).update({
-      "name" : name,
-      "type" : type
+      name,
+      type
     })
 
     if (resUpdate>0){

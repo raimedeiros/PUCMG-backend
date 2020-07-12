@@ -35,7 +35,7 @@ class EstoquesController{
     const {id} = request.params
     const { name } = request.body
     const resUpdate = await knex('tipos_estoques').where({id:id}).update({
-      "name" : name
+      name
     })
 
     if (resUpdate>0){
