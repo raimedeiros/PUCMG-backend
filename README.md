@@ -13,3 +13,4 @@ Cria toda a estrutura do banco de dados:
 Popula o banco de dados com valores pré cadastrados
 
 > yarn knex:seed 
+
