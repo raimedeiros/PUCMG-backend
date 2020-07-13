@@ -2,10 +2,10 @@ import Knex from 'knex'
 
 export async function seed(knex: Knex) {
     await knex('desperdicios').insert([
-        { produto:'1',quantidade:'2kg',data:'2020/12/15',razao:'vencido'},
-        { produto:'2',quantidade:'12kg',data:'2020/12/15',razao:'vencido'},
-        { produto:'2',quantidade:'32kg',data:'2020/12/15',razao:'vencido'},
-        { produto:'3',quantidade:'442kg',data:'2020/12/15',razao:'vencido'},
-        { produto:'4',quantidade:'12kg',data:'2020/12/15',razao:'vencido'},
+        { product:'1',amount:'2kg',date:'2020/12/15',reason:'vencido'},
+        { product:'2',amount:'12kg',date:'2020/12/15',reason:'vencido'},
+        { product:'2',amount:'32kg',date:'2020/12/15',reason:'vencido'},
+        { product:'3',amount:'442kg',date:'2020/12/15',reason:'vencido'},
+        { product:'4',amount:'12kg',date:'2020/12/15',reason:'vencido'},
     ])
 }
