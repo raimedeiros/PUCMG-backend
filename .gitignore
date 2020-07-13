@@ -164,4 +164,7 @@ sketch
 # Ignore all local history of files
 .history
 
+## Ignore sqlite database
+src/databases/database.sqlite
+
 # End of https://www.toptal.com/developers/gitignore/api/node,macos,react,visualstudiocode
