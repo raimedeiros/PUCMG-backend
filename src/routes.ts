@@ -4,6 +4,7 @@ import EstoquesController from './controllers/EstoquesController'
 import ProdutosController from './controllers/ProdutosController'
 import FuncionariosController from './controllers/FuncionariosController'
 import DesperdiciosController from './controllers/DesperdiciosController'
+import FornecedoresController from './controllers/FornecedoresController'
 
 const routes = express.Router();
 const estoquesController = new EstoquesController()
@@ -11,6 +12,7 @@ const tiposEstoquesController = new TiposEstoquesController()
 const produtosController = new ProdutosController()
 const funcionariosController = new FuncionariosController()
 const desperdiciosController = new DesperdiciosController()
+const fornecedoresController = new FornecedoresController()
 
 routes.get('/tipos-estoques', tiposEstoquesController.index)
 routes.get('/tipos-estoques/:id', tiposEstoquesController.show)
@@ -40,5 +42,11 @@ routes.get('/desperdicios/:id',desperdiciosController.show)
 routes.post('/desperdicios',desperdiciosController.create)
 routes.post('/desperdicios/:id',desperdiciosController.update)
 routes.delete('/desperdicios/:id',desperdiciosController.delete)
+
+routes.get('/fornecedores',fornecedoresController.index)
+routes.get('/fornecedores/:id',fornecedoresController.show)
+routes.post('/fornecedores',fornecedoresController.create)
+routes.post('/fornecedores/:id',fornecedoresController.update)
+routes.delete('/fornecedores/:id',fornecedoresController.delete)
 
 export default routes
