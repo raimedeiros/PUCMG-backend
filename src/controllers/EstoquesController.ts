@@ -4,7 +4,7 @@ import knex from '../database/connection'
 class EstoquesController{
   async index(request: Request, response: Response) {
     const estoques = await knex('estoque_tipoEstoque')
-    .select('estoques.*', 'tipos_estoques.name as tipo')
+    .select('estoques.*', 'tipos_estoques.name as type')
     .innerJoin('estoques','estoque_tipoEstoque.estoque_id','=','estoques.id')
     .innerJoin('tipos_estoques','estoque_tipoEstoque.tipoEstoque_id','=','tipos_estoques.id')
     return response.json(estoques)
