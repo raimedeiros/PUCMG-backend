@@ -3,11 +3,16 @@ import knex from '../database/connection'
 
 class ProdutosController{
   async index(request: Request, response: Response) {
-    const estoques = await knex('produto_estoque')
-    .select('produtos.*', 'estoques.name as estoque')
+    console.log(request.query)
+    const {estoque} = request.query
+    const produtos = await knex('produto_estoque')
+    .select('produtos.*', 'estoques.name as estoque_name', 'estoques.id as estoque_id')
     .innerJoin('produtos','produto_estoque.produto_id','=','produtos.id')
     .innerJoin('estoques','produto_estoque.estoque_id','=','estoques.id')
-    return response.json(estoques)
+  
+    const filteredProdutos = produtos.filter(produto=>produto.estoque_id==estoque)
+    
+    return response.json(estoque ? filteredProdutos: produtos)
   }
   async show(request: Request, response: Response) {
     const {id} = request.params
