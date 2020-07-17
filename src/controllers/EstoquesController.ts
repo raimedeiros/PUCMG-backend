@@ -4,10 +4,25 @@ import knex from '../database/connection'
 class EstoquesController{
   async index(request: Request, response: Response) {
     const estoques = await knex('estoque_tipoEstoque')
-    .select('estoques.*', 'tipos_estoques.name as type')
     .innerJoin('estoques','estoque_tipoEstoque.estoque_id','=','estoques.id')
     .innerJoin('tipos_estoques','estoque_tipoEstoque.tipoEstoque_id','=','tipos_estoques.id')
-    return response.json(estoques)
+    .select('estoques.*', 'tipos_estoques.name as type')
+    
+    const estoquesRich = await Promise.all(estoques.map(async estoque=>{
+      const quantidade_produtos = await knex('produto_estoque')
+      .where('estoque_id',estoque.id)
+      .count('id',{as:'quantidade_produtos'})
+      .then(total=>{
+        return total[0].quantidade_produtos
+      })
+      estoque={
+        ...estoque,
+        quantidade_produtos
+      }
+      return estoque
+    }))
+
+    return response.json(estoquesRich)
   }
 
   async show(request: Request, response: Response) {
