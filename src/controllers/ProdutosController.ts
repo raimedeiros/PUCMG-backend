@@ -3,7 +3,6 @@ import knex from '../database/connection'
 
 class ProdutosController{
   async index(request: Request, response: Response) {
-    console.log(request.query)
     const {estoque} = request.query
     const produtos = await knex('produto_estoque')
     .select('produtos.*', 'estoques.name as estoque_name', 'estoques.id as estoque_id')
