@@ -26,8 +26,8 @@ class ProdutosController{
     return response.json({produtos,estoque})
   }
   async create(request:Request, response:Response){
-    const {name,expires,quantity,estoque} = request.body
-    const produto = {name,expires,quantity}
+    const {name,expires,amount,estoque} = request.body
+    const produto = {name,expires,amount}
 
     const trx = await knex.transaction()
     const insertedIds = await trx('produtos').insert(produto)
@@ -46,11 +46,11 @@ class ProdutosController{
   }
   async update(request:Request, response:Response){
     const {id} = request.params
-    const {name, expires,quantity} = request.body
+    const {name, expires,amount} = request.body
     const resUpdate = await knex('produtos').where({id:id}).update({
       name,
       expires,
-      quantity
+      amount
     })
     if (resUpdate>0){
       return response.status(200).json({message: 'item atualizado'})
