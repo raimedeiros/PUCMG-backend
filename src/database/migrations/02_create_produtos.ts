@@ -4,7 +4,7 @@ export async function up(knex: Knex) {
         table.increments('id').primary();
         table.string('name').notNullable();
         table.date('expires').notNullable();
-        table.integer('quantity').notNullable();
+        table.integer('amount').notNullable();
     })
  }
 
