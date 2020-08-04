@@ -30,6 +30,7 @@ routes.get('/produtos', produtosController.index)
 routes.get('/produtos/:id', produtosController.show)
 routes.post('/produtos', produtosController.create)
 routes.post('/produtos/:id', produtosController.update)
+routes.delete('/produtos/:id', produtosController.delete)
 
 routes.get('/funcionarios',funcionariosController.index)
 routes.get('/funcionarios/:id',funcionariosController.show)

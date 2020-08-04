@@ -57,6 +57,18 @@ class ProdutosController{
     }
     return response.status(400).json({ message: 'item inexistente'})
   }
+  async delete(request:Request, response: Response){
+    const { id } = request.params
+    
+    const trx = await knex.transaction()
+    await trx('produto_estoque').where('produto_id',id).del()
+    const resUpdate = await trx('produtos').where("id",id).del()
+    await trx.commit()
+    if (resUpdate>0){
+      return response.status(200).json({message: 'item removido'})
+    }
+    return response.status(400).json({ message: 'item inexistente'})
+  }
 }
 
 export default ProdutosController

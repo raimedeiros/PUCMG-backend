@@ -17,8 +17,8 @@ class DesperdiciosController{
   }
 
   async create(request: Request, response: Response) {
-    const  {product,amount,date,reason} = request.body;
-    const desperdicio = {product,amount,date,reason}
+    const  {name,amount,date,reason} = request.body;
+    const desperdicio = {name,amount,date,reason}
 
     const trx = await knex.transaction()
     const insertedIds = await trx('desperdicios').insert(desperdicio)
@@ -33,9 +33,9 @@ class DesperdiciosController{
 
   async update(request:Request,response:Response){
     const {id} = request.params
-    const { product,amount,date,reason } = request.body
+    const { name,amount,date,reason } = request.body
     const resUpdate = await knex('desperdicios').where({id:id}).update({
-      product,
+      name,
       amount,
       date,
       reason
