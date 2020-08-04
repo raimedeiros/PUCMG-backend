@@ -5,6 +5,7 @@ import ProdutosController from './controllers/ProdutosController'
 import FuncionariosController from './controllers/FuncionariosController'
 import DesperdiciosController from './controllers/DesperdiciosController'
 import FornecedoresController from './controllers/FornecedoresController'
+import TiposFuncionariosController from './controllers/TiposFuncionariosController';
 
 const routes = express.Router();
 const estoquesController = new EstoquesController()
@@ -13,12 +14,19 @@ const produtosController = new ProdutosController()
 const funcionariosController = new FuncionariosController()
 const desperdiciosController = new DesperdiciosController()
 const fornecedoresController = new FornecedoresController()
+const tiposFuncionariosController = new TiposFuncionariosController()
 
 routes.get('/tipos-estoques', tiposEstoquesController.index)
 routes.get('/tipos-estoques/:id', tiposEstoquesController.show)
 routes.post('/tipos-estoques', tiposEstoquesController.create)
 routes.post('/tipos-estoques/:id', tiposEstoquesController.update)
 routes.delete('/tipos-estoques/:id', tiposEstoquesController.delete)
+
+routes.get('/tipos-funcionarios', tiposFuncionariosController.index)
+routes.get('/tipos-funcionarios/:id', tiposFuncionariosController.show)
+routes.post('/tipos-funcionarios', tiposFuncionariosController.create)
+routes.post('/tipos-funcionarios/:id', tiposFuncionariosController.update)
+routes.delete('/tipos-funcionarios/:id', tiposFuncionariosController.delete)
 
 routes.get('/estoques', estoquesController.index)
 routes.get('/estoques/:id', estoquesController.show)
