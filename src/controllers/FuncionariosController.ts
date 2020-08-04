@@ -21,7 +21,7 @@ class FuncionariosController{
     const tipo_funcionario = await knex('tipos_funcionarios')
     .join('funcionario_tipoFuncionario','tipos_funcionarios.id','=','funcionario_tipoFuncionario.tipoFuncionario_id')
     .where('funcionario_tipoFuncionario.funcionario_id',id)
-    .select('tipos_funcionarios.name as tipo')
+    .select('tipos_funcionarios.id as tipo').first()
     return response.json({funcionario,tipo_funcionario})
   }
   
