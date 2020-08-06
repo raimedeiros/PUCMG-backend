@@ -1,1 +1,1 @@
-web: yarn build
+web:dist/src/server.ts
