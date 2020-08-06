@@ -7,7 +7,7 @@ class FuncionariosController{
     const funcionarios = await knex('funcionario_tipoFuncionario')
     .innerJoin('funcionarios','funcionario_tipoFuncionario.funcionario_id','=','funcionarios.id')
     .innerJoin('tipos_funcionarios','funcionario_tipoFuncionario.tipoFuncionario_id','=','tipos_funcionarios.id')
-    .select('funcionarios.*', 'tipos_funcionarios.name as type')
+    .select('funcionarios.*', 'tipos_funcionarios.name as type') 
 
     return response.json(funcionarios)
   }

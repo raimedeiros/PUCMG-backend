@@ -1,13 +1,11 @@
 import Knex from 'knex'
-import {uuid} from 'uuidv4'
+import {hash} from 'bcryptjs'
 
 export async function seed(knex: Knex) {
+    const password = await hash('123', 8);
     await knex('funcionarios').insert([
-        { id:uuid(), name: 'Gilberto Braga'},
-        { id:uuid(), name: 'Felícia Braga'},
-        { id:uuid(), name: 'Maria Pacheco'},
-        { id:uuid(), name: 'Elma Silva'},
-        { id:uuid(), name: 'João Nascimento'},
-        { id:uuid(), name: 'José Peixoto'},
+        { name: 'Gilberto Braga',email:"user@user.user",password},
+        { name: 'Felícia Braga',email:"user@user.user",password},
+        { name: 'Maria Pacheco',email:"user@user.user",password},
     ])
 }
