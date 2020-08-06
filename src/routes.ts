@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { response } from 'express';
 import TiposEstoquesController from './controllers/TiposEstoquesController'
 import EstoquesController from './controllers/EstoquesController'
 import ProdutosController from './controllers/ProdutosController'
@@ -15,6 +15,9 @@ const funcionariosController = new FuncionariosController()
 const desperdiciosController = new DesperdiciosController()
 const fornecedoresController = new FornecedoresController()
 const tiposFuncionariosController = new TiposFuncionariosController()
+
+routes.get('/', (request,response)=>{
+  return response.json({message:"Backend NodeJS"})})
 
 routes.get('/tipos-estoques', tiposEstoquesController.index)
 routes.get('/tipos-estoques/:id', tiposEstoquesController.show)
