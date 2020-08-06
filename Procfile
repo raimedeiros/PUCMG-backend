@@ -1,1 +1,1 @@
-web:node dist/src/server.ts
+web:ts-node/src/server.ts
