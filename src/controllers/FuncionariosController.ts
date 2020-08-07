@@ -1,14 +1,12 @@
 import { Request, Response } from 'express'
 import knex from '../database/connection'
-import {uuid} from 'uuidv4'
 
 class FuncionariosController{
   async index(request: Request, response: Response) {
     const funcionarios = await knex('funcionario_tipoFuncionario')
     .innerJoin('funcionarios','funcionario_tipoFuncionario.funcionario_id','=','funcionarios.id')
     .innerJoin('tipos_funcionarios','funcionario_tipoFuncionario.tipoFuncionario_id','=','tipos_funcionarios.id')
-    .select('funcionarios.*', 'tipos_funcionarios.name as type') 
-
+    .select('funcionarios.id', 'funcionarios.name','funcionarios.email', 'tipos_funcionarios.name as type') 
     return response.json(funcionarios)
   }
 
@@ -26,31 +24,36 @@ class FuncionariosController{
   }
   
   async create(request: Request, response: Response) {
-    const  {name,type} = request.body;
+    console.log("create")
+    console.log(request.params)
+     const  {name,email, password} = request.body;
     const funcionario = {
-      id:uuid(),
-      name
+      name,
+      email,
+      password,
     }
 
     const trx = await knex.transaction()
     const insertedIds = await trx('funcionarios').insert(funcionario)
-
+    console.log(insertedIds[0])
     if (insertedIds){
-      const tipo_funcionario = {funcionario_id:funcionario.id,tipoFuncionario_id:type}
+      const tipo_funcionario = {funcionario_id:insertedIds[0],tipoFuncionario_id:1}
+      console.log(tipo_funcionario)
       await trx('funcionario_tipoFuncionario').insert(tipo_funcionario)
       await trx.commit()
       return response.json({
         ...funcionario
       })
-    }
+    } 
   }
 
   async update(request:Request,response:Response){
+    console.log("update")
     const {id} = request.params
-    const { name, type } = request.body
+     const { name, type, email } = request.body
 
     const trx = await knex.transaction()
-    let resUpdateFuncionario = await trx('funcionarios').where({id:id}).update({name})
+    let resUpdateFuncionario = await trx('funcionarios').where({id:id}).update({name,email})
     
     if(type){
       const resUpdateTipoFuncionario = await trx('funcionario_tipoFuncionario')
@@ -62,7 +65,7 @@ class FuncionariosController{
     if (resUpdateFuncionario>0){
       return response.status(200).json({message: 'item atualizado'})
     }
-    return response.status(400).json({ message: 'item inexistente'})
+    return response.status(400).json({ message: 'item inexistente'}) 
   }
 
   async delete(request:Request, response: Response){
