@@ -1,14 +1,14 @@
 import { Request,Response } from 'express'
-import knex from '../database/connection'
+/* import knex from '../database/connection'
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import AuthConfig from '../config/auth';
+import AuthConfig from '../config/auth'; */
 
 
 class AuthenticateUserController {
   async create(request: Request, response: Response) {
-
-    try {
+    return response.json({message:true})
+    /* try {
       const { email, password } = request.body;
     
       const user = await knex('funcionarios').where('email',email).first()
@@ -33,7 +33,7 @@ class AuthenticateUserController {
       return response.json({ user, token });
     } catch (error) {
       return response.status(401).json({message:"Usuário ou senha incorretos"})
-    }
+    } */
   }
 }
 export default AuthenticateUserController;
