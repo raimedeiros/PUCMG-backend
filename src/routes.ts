@@ -1,4 +1,6 @@
 import express, { response } from 'express';
+
+import AuthenticateUserController from './controllers/AuthenticateUserController';
 import TiposEstoquesController from './controllers/TiposEstoquesController'
 import EstoquesController from './controllers/EstoquesController'
 import ProdutosController from './controllers/ProdutosController'
@@ -7,7 +9,7 @@ import DesperdiciosController from './controllers/DesperdiciosController'
 import FornecedoresController from './controllers/FornecedoresController'
 import TiposFuncionariosController from './controllers/TiposFuncionariosController';
 
-const routes = express.Router();
+const authenticateUserController = new AuthenticateUserController()
 const estoquesController = new EstoquesController()
 const tiposEstoquesController = new TiposEstoquesController()
 const produtosController = new ProdutosController()
@@ -15,6 +17,8 @@ const funcionariosController = new FuncionariosController()
 const desperdiciosController = new DesperdiciosController()
 const fornecedoresController = new FornecedoresController()
 const tiposFuncionariosController = new TiposFuncionariosController()
+
+const routes = express.Router();
 
 routes.get('/', (request,response)=>{
   return response.json({message:"Backend NodeJS"})})
@@ -60,5 +64,22 @@ routes.get('/fornecedores/:id',fornecedoresController.show)
 routes.post('/fornecedores',fornecedoresController.create)
 routes.post('/fornecedores/:id',fornecedoresController.update)
 routes.delete('/fornecedores/:id',fornecedoresController.delete)
+
+routes.post('/sessions',authenticateUserController.create)
+/* 
+routes.post('/sessions', async (request, response) => {
+  try {
+    const { email, password } = request.body;
+  
+    const authenticateUser = new authenticateUserController();
+  
+    const { user, token } = await authenticateUser.execute({ email, password });
+    //delete user.password;
+  
+    return response.json({ user, token });
+  } catch (error) {
+    return response.status(401).json({message:"Usuário ou senha incorretos"})
+  }
+}); */
 
 export default routes
