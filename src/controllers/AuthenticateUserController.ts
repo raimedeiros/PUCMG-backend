@@ -1,8 +1,8 @@
+import { Request,Response } from 'express'
+import knex from '../database/connection'
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import AuthConfig from '../config/auth';
-import knex from '../database/connection'
-import { Request,Response } from 'express'
 
 
 class AuthenticateUserController {
