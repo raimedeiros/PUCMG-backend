@@ -5,7 +5,7 @@ import cors from 'cors'
 const PORT : string|number = process.env.PORT || 3333;
 const app = express()
 
-app.use(cors({origin: 'https://despensa-frontend.herokuapp.com'}));
+app.use(cors({origin: '*'}));
 app.use(express.json())
 app.use(routes)
 app.use("*",(req, res) =>{
