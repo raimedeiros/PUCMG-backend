@@ -1,4 +1,7 @@
 import express, { response } from 'express';
+
+import authenticateUserController from './controllers/AuthenticateUserController';
+
 import TiposEstoquesController from './controllers/TiposEstoquesController'
 import EstoquesController from './controllers/EstoquesController'
 import ProdutosController from './controllers/ProdutosController'
@@ -60,5 +63,20 @@ routes.get('/fornecedores/:id',fornecedoresController.show)
 routes.post('/fornecedores',fornecedoresController.create)
 routes.post('/fornecedores/:id',fornecedoresController.update)
 routes.delete('/fornecedores/:id',fornecedoresController.delete)
+
+routes.post('/sessions', async (request, response) => {
+  try {
+    const { email, password } = request.body;
+  
+    const authenticateUser = new authenticateUserController();
+  
+    const { user, token } = await authenticateUser.execute({ email, password });
+    //delete user.password;
+  
+    return response.json({ user, token });
+  } catch (error) {
+    return response.status(401).json({message:"Usuário ou senha incorretos"})
+  }
+});
 
 export default routes
