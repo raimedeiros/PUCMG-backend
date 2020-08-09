@@ -66,20 +66,5 @@ routes.post('/fornecedores/:id',fornecedoresController.update)
 routes.delete('/fornecedores/:id',fornecedoresController.delete)
 
 routes.post('/sessions',authenticateUserController.create)
-/* 
-routes.post('/sessions', async (request, response) => {
-  try {
-    const { email, password } = request.body;
-  
-    const authenticateUser = new authenticateUserController();
-  
-    const { user, token } = await authenticateUser.execute({ email, password });
-    //delete user.password;
-  
-    return response.json({ user, token });
-  } catch (error) {
-    return response.status(401).json({message:"Usuário ou senha incorretos"})
-  }
-}); */
 
 export default routes
