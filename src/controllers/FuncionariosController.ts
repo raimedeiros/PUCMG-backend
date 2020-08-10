@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import {hash} from 'bcryptjs'
 import knex from '../database/connection'
 
 class FuncionariosController{
@@ -24,21 +25,19 @@ class FuncionariosController{
   }
   
   async create(request: Request, response: Response) {
-    console.log("create")
-    console.log(request.params)
-     const  {name,email, password} = request.body;
+
+    const  {name,email,password} = request.body;
+    const passwordCripted =  await hash(password, 8);
     const funcionario = {
       name,
       email,
-      password,
+      password:passwordCripted,
     }
 
     const trx = await knex.transaction()
     const insertedIds = await trx('funcionarios').insert(funcionario)
-    console.log(insertedIds[0])
     if (insertedIds){
       const tipo_funcionario = {funcionario_id:insertedIds[0],tipoFuncionario_id:1}
-      console.log(tipo_funcionario)
       await trx('funcionario_tipoFuncionario').insert(tipo_funcionario)
       await trx.commit()
       return response.json({
