@@ -3,7 +3,7 @@ import app from '../server';
 
 describe('Funcionarios', () => {
 
-  it('possivel listar funcionários', async () => {
+  it('Possível listar funcionários', async () => {
     const response = await request(app).get('/funcionarios');
     expect(response.body).toEqual(
       expect.arrayContaining([
@@ -17,7 +17,7 @@ describe('Funcionarios', () => {
     );
   })
 
-  it('possivel criar funcionário',async()=>{
+  it('Possível criar funcionário',async()=>{
     const response = await request(app).post('/funcionarios').send({
       email: "gilberto@despensa.com", 
       name: "Gilberto Braga",
@@ -30,7 +30,7 @@ describe('Funcionarios', () => {
     });
   }) 
 
-  it('possivel editar funcionário',async()=>{
+  it('Possível editar funcionário',async()=>{
     const response = await request(app).post('/funcionarios/2').send({
       email: "Felícia Braga", 
       name: "felicia@espensa.com.br",

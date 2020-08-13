@@ -3,7 +3,7 @@ import app from '../server';
 
 describe('Tipos de Estoques', () => {
 
-  it('possivel listar tipos de estoques', async () => {
+  it('Possível listar tipos de estoques', async () => {
     const response = await request(app).get('/tipos-estoques');
     expect(response.body).toEqual(
       expect.arrayContaining([

@@ -3,7 +3,7 @@ import app from '../server';
 
 describe('Fornecedores', () => {
 
-  it('possivel listar fornecedores', async () => {
+  it('Possível listar fornecedores', async () => {
     const response = await request(app).get('/fornecedores');
     expect(response.body).toEqual(
       expect.arrayContaining([
@@ -17,7 +17,7 @@ describe('Fornecedores', () => {
     );
   })
   
-  it('possivel criar Fornecedor',async()=>{
+  it('Possível criar Fornecedor',async()=>{
     const response = await request(app).post('/fornecedores').send({
       address: "Scee / Sul Lote B - Guará, Brasília - DF",
       name: 'Carrefour Hipermercado',
@@ -31,7 +31,7 @@ describe('Fornecedores', () => {
     });
   }) 
 
-  it('possivel editar Fornecedor',async()=>{
+  it('Possível editar Fornecedor',async()=>{
     const response = await request(app).post('/fornecedores/2').send({
       name: "Mercado Malunga Brasília",
       address: "Bloco A - CLSW 104, LJ, C",

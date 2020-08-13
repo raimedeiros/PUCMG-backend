@@ -3,7 +3,7 @@ import app from '../server';
 
 describe('Deseperdicios', () => {
 
-  it('possivel listar desperdicios', async () => {
+  it('Possível listar desperdicios', async () => {
     const response = await request(app).get('/desperdicios');
     expect(response.body).toEqual(
       expect.arrayContaining([
@@ -18,7 +18,7 @@ describe('Deseperdicios', () => {
     );
   })
 
-  it('possivel criar desperdício',async()=>{
+  it('Possível criar desperdício',async()=>{
     const response = await request(app).post('/desperdicios').send({
       name: "Farinha de trigo",
       amount: "2000",
