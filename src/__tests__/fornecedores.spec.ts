@@ -30,4 +30,15 @@ describe('Fornecedores', () => {
       phone: "(61) 3208-2314",
     });
   }) 
+
+  it('possivel editar Fornecedor',async()=>{
+    const response = await request(app).post('/fornecedores/2').send({
+      name: "Mercado Malunga Brasília",
+      address: "Bloco A - CLSW 104, LJ, C",
+      phone: "(61) 3772-1613"
+    });
+    expect(response.body).toMatchObject({
+      message: "item atualizado"
+    });
+  }) 
 });

@@ -66,7 +66,6 @@ class FuncionariosController{
   }
 
   async update(request:Request,response:Response){
-    console.log("update")
     const {id} = request.params
      const { name, type, email } = request.body
 

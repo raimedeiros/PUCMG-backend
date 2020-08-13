@@ -1,7 +1,7 @@
 import request from 'supertest';
 import app from '../server';
 
-describe('Estoques', () => {
+describe('Produtos', () => {
 
   it('possivel listar produtos', async () => {
     const response = await request(app).get('/produtos');
@@ -34,4 +34,18 @@ describe('Estoques', () => {
       estoque: 1,
     });
   }) 
+
+  it('possivel editar produto',async()=>{
+    const response = await request(app).post('/produtos/2').send({
+      name: "Leite Integral Orgânico",
+      expires: "2020-04-19T03:00:00.000Z",
+      amount: 3000,
+      estoque_name: "Armário",
+      estoque_id: 3
+    });
+    expect(response.body).toMatchObject({
+      message: "item atualizado"
+    });
+  }) 
+
 });
