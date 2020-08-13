@@ -18,4 +18,20 @@ describe('Estoques', () => {
       ]),
     );
   })
+
+  it('possivel criar produto',async()=>{
+    const response = await request(app).post('/produtos').send({
+      name: "Farinha de trigo",
+      expires: "2020-06-19T03:00:00.000Z",
+      amount: "2000",
+      estoque: 1,
+    });
+    expect(response.body).toMatchObject({
+      id: expect.any(Number),
+      name: "Farinha de trigo",
+      expires: "2020-06-19T03:00:00.000Z",
+      amount: "2000",
+      estoque: 1,
+    });
+  }) 
 });

@@ -16,4 +16,18 @@ describe('Fornecedores', () => {
       ]),
     );
   })
+  
+  it('possivel criar Fornecedor',async()=>{
+    const response = await request(app).post('/fornecedores').send({
+      address: "Scee / Sul Lote B - Guará, Brasília - DF",
+      name: 'Carrefour Hipermercado',
+      phone: "(61) 3208-2314",
+    });
+    expect(response.body).toMatchObject({
+      id: expect.any(Number),
+      address: "Scee / Sul Lote B - Guará, Brasília - DF",
+      name: 'Carrefour Hipermercado',
+      phone: "(61) 3208-2314",
+    });
+  }) 
 });

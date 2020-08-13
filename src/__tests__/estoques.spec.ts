@@ -16,7 +16,7 @@ describe('Estoques', () => {
       ]),
     );
   })
-  /* it('possivel criar estoque',async()=>{
+  it('possivel criar estoque',async()=>{
     const response = await request(app).post('/estoques').send({
       name: 'Estoque de teste',
       type: 1,
@@ -25,5 +25,5 @@ describe('Estoques', () => {
       id: expect.any(Number),
       name: 'Estoque de teste',
     });
-  })  */
+  }) 
 });

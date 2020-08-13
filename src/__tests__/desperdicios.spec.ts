@@ -17,4 +17,20 @@ describe('Deseperdicios', () => {
       ]),
     );
   })
+
+  it('possivel criar desperdício',async()=>{
+    const response = await request(app).post('/desperdicios').send({
+      name: "Farinha de trigo",
+      amount: "2000",
+      reason: "vencido",
+      date: "2020-06-19T03:00:00.000Z"
+    });
+    expect(response.body).toMatchObject({
+      id: expect.any(Number),
+      name: "Farinha de trigo",
+      amount: "2000",
+      reason: "vencido",
+      date: "2020-06-19T03:00:00.000Z"
+    });
+  }) 
 });
