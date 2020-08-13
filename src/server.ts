@@ -12,4 +12,8 @@ app.use("*",(req, res) =>{
   res.send("<h1>Welcome to your simple server! Awesome right</h1>");
 });
 
-app.listen(PORT,()=>console.log(`🚀 Server started on port ${PORT}`)) 
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT,()=>console.log(`🚀 Server started on port ${PORT}`)) 
+}
+
+export default app

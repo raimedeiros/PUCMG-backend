@@ -8,6 +8,7 @@
   "scripts": {
     "start": "ts-node src/server.ts",
     "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
+    "test": "NODE_ENV=test jest --watchAll --forceExit",
     "knex:migrate": "knex --knexfile knexfile.ts migrate:latest",
     "knex:seed": "knex --knexfile knexfile.ts seed:run",
     "knex:clear": "rm src/database/database.sqlite"
@@ -25,7 +26,12 @@
     "uuidv4": "^6.1.1",
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.7",
-    "@types/jsonwebtoken": "^8.5.0"
+    "@types/jsonwebtoken": "^8.5.0",
+    "jest": "^25.3.0",
+    "supertest": "^4.0.2",
+    "ts-jest": "^25.3.1",
+    "@types/supertest": "^2.0.8",
+    "@types/jest": "^25.2.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.4",
