@@ -35,5 +35,21 @@ class AuthenticateUserController {
       return response.status(401).json({message:"Usuário ou senha incorretos"})
     }
   }
+
+  async createFacebook(request: Request, response: Response) {
+
+    try {
+      const { dbUser, accessToken } = request.body;
+      console.log(request.body)
+      return response.json({ 
+        user:{
+          id:dbUser.id,
+          name:dbUser.name,
+          email:dbUser.email
+        }, token:accessToken });
+    } catch (error) {
+      return response.status(401).json({message:"Usuário ou senha incorretos"})
+    }
+  }
 }
 export default AuthenticateUserController;

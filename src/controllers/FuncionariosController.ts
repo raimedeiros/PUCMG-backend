@@ -4,11 +4,30 @@ import knex from '../database/connection'
 
 class FuncionariosController{
   async index(request: Request, response: Response) {
+    const {email} = request.query
+    
+    if(email){
+      try {
+        const funcionario = await knex('funcionarios').where({'email':email}).first()
+  
+        const funcionarios = await knex('funcionario_tipoFuncionario')
+        .where({'funcionario_id':funcionario.id})
+        .innerJoin('funcionarios','funcionario_tipoFuncionario.funcionario_id','=','funcionarios.id')
+        .innerJoin('tipos_funcionarios','funcionario_tipoFuncionario.tipoFuncionario_id','=','tipos_funcionarios.id')
+        .select('funcionarios.id', 'funcionarios.name','funcionarios.email', 'tipos_funcionarios.name as type') 
+        .first()
+        return response.json(funcionarios)
+      } catch (error) {
+        return response.status(400).json([])
+      }
+    }
+
     const funcionarios = await knex('funcionario_tipoFuncionario')
     .innerJoin('funcionarios','funcionario_tipoFuncionario.funcionario_id','=','funcionarios.id')
     .innerJoin('tipos_funcionarios','funcionario_tipoFuncionario.tipoFuncionario_id','=','tipos_funcionarios.id')
     .select('funcionarios.id', 'funcionarios.name','funcionarios.email', 'tipos_funcionarios.name as type') 
-    return response.json(funcionarios)
+    return response.json(funcionarios) 
+    
   }
 
   async show(request: Request, response: Response) {

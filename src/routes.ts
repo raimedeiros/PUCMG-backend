@@ -66,5 +66,6 @@ routes.post('/fornecedores/:id',fornecedoresController.update)
 routes.delete('/fornecedores/:id',fornecedoresController.delete)
 
 routes.post('/sessions',authenticateUserController.create)
+routes.post('/sessionsFacebook',authenticateUserController.createFacebook)
 
 export default routes
