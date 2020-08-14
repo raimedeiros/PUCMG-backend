@@ -3,7 +3,7 @@ import app from '../server';
 
 describe('Deseperdicios', () => {
 
-  it('Possível listar desperdicios', async () => {
+  it('Possível listar desperdícios', async () => {
     const response = await request(app).get('/desperdicios');
     expect(response.body).toEqual(
       expect.arrayContaining([
