@@ -9,9 +9,17 @@ class AuthenticateUserController {
   async create(request: Request, response: Response) {
 
     try {
-      const { email, password } = request.body;
+      const { email, password} = request.body;
     
-      const user = await knex('funcionarios').where('email',email).first()
+      const funcionario = await knex('funcionarios')
+        .where('email',email).first()
+
+      const user = await knex('funcionario_tipoFuncionario')
+      .where({'funcionario_id':funcionario.id})
+      .innerJoin('funcionarios','funcionario_tipoFuncionario.funcionario_id','=','funcionarios.id')
+      .innerJoin('tipos_funcionarios','funcionario_tipoFuncionario.tipoFuncionario_id','=','tipos_funcionarios.id')
+      .select('funcionarios.*', 'tipos_funcionarios.id as type') 
+      .first()
       
       if (!user) {
         return response.status(401).json({message:"Usuário ou senha incorretos"})
