@@ -1,0 +1,100 @@
+
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Despensa - API",
+    "description": "Referência da API do projeto Despensa",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "host": "localhost:3333",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "funcionarios",
+      "description": "API para os funcionários"
+    }
+  ],
+  "paths": {
+    "/funcionarios": {
+      "get": {
+        "tags":["funcionarios"],
+        "description": "Retorna todos os funcionários cadastrados",
+        "responses": {
+          "200": {          
+            "description": "Uma lista de funcionários",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/funcionarios/{id}": {
+      "parameters":[
+        {
+          "name": "id",
+          "in": "path",
+          "description": "ID do funcionário",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "tags":["funcionarios"],
+        "description": "Retorna o funcionário selecionado pelo id",
+        "responses": {
+          "200": {          
+            "description": "Um funcionário",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/definitions/funcionario"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions":{
+    "funcionario":{
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "name":{
+          "type":"string"
+        },
+        "email":{
+          "type":"string"
+        },
+        "password":{
+          "type":"string"
+        }
+      }
+    }
+  }
+}

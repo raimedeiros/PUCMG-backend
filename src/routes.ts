@@ -19,9 +19,11 @@ const fornecedoresController = new FornecedoresController()
 const tiposFuncionariosController = new TiposFuncionariosController()
 
 const routes = express.Router();
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('../swagger.json');
 
-routes.get('/', (request,response)=>{
-  return response.json({message:"Backend NodeJS"})})
+routes.use('/', swaggerUi.serve);
+routes.get('/', swaggerUi.setup(swaggerDocument));
 
 routes.get('/tipos-estoques', tiposEstoquesController.index)
 routes.get('/tipos-estoques/:id', tiposEstoquesController.show)
