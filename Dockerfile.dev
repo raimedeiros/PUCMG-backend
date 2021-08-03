@@ -1,0 +1,14 @@
+# Select node image
+FROM node:14
+
+# Set the work path
+WORKDIR "/app"
+
+# Dependencies
+COPY package.json .
+RUN npm install
+
+COPY . .
+
+# Start the project
+CMD ["npm", "run", "dev"]
