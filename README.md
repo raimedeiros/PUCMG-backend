@@ -15,6 +15,12 @@ To create a container with the image of this project and start it, use:
 
 ```docker-compose up```
 
+### Running with npm
+
+To run this project with npm, use:
+
+```npm run dev```
+
 ### Database setup
 
 To compleately clear database items, use: 
